@@ -552,16 +552,38 @@ body {
 
 .download-icoon { font-size: 1.8rem; }
 .download-naam { font-size: 0.95rem; font-weight: 700; }
-.download-label {
-  font-size: 0.75rem;
-  color: #2980b9;
-  font-weight: 600;
+
+.download-knoppen {
   display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 2px;
+  gap: 6px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.download-label::before { content: "⬇"; font-size: 0.7rem; }
+
+.dl-knop {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.dl-knop-kijken {
+  background: #eaf4fd;
+  color: #2980b9;
+  border: 1.5px solid #aed6f1;
+}
+.dl-knop-kijken:hover { background: #d0eaf8; }
+
+.dl-knop-downloaden {
+  background: #eafaf1;
+  color: #1a7a45;
+  border: 1.5px solid #a9dfbf;
+}
+.dl-knop-downloaden:hover { background: #d5f5e3; }
 
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 600px) {
