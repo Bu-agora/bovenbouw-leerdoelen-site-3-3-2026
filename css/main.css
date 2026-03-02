@@ -24,7 +24,6 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   padding-top: 52px;
-  padding-bottom: 44px;
 }
 
 /* ===================== GLOBALE NAVBAR ===================== */
@@ -32,14 +31,13 @@ body {
   position: fixed;
   top: 0; left: 0; right: 0;
   height: 52px;
-  background: rgba(15, 15, 35, 0.82);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
   display: flex;
   align-items: center;
   padding: 0 20px;
   z-index: 1000;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid var(--kleur-border);
 }
 
 .site-nav-logo {
@@ -58,30 +56,22 @@ body {
 
 /* ===================== GLOBALE FOOTER ===================== */
 .site-footer-global {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: 44px;
-  background: rgba(15, 15, 35, 0.82);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 20px;
+  text-align: center;
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.65);
-  z-index: 1000;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  gap: 4px;
+  color: var(--kleur-tekst-licht);
+  border-top: 1px solid var(--kleur-border);
+  background: var(--kleur-wit);
 }
 
 .footer-link {
-  color: rgba(255,255,255,0.90);
+  color: var(--kleur-tekst);
   font-weight: 700;
   text-decoration: none;
   transition: color 0.15s;
 }
 
-.footer-link:hover { color: #fff; text-decoration: underline; }
+.footer-link:hover { text-decoration: underline; }
 
 /* ===================== SCHERMEN ===================== */
 .scherm { display: block; }
