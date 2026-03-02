@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leerdoelen Oefenen — Bovenbouw</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/flashcard.css">
+  <link rel="stylesheet" href="css/quiz.css">
+</head>
+<body>
+
+  <!-- ===================== HOME ===================== -->
+  <div id="scherm-home" class="scherm" hidden>
+    <header class="hero">
+      <div class="hero-overlay">
+        <h1 class="hero-titel">Leerdoelen Oefenen</h1>
+        <p class="hero-subtitel">Kies een vak en start met leren — met flashcards of een quiz!</p>
+      </div>
+    </header>
+
+    <main class="home-inhoud">
+      <section class="vak-sectie">
+        <h2 class="sectie-titel">Kies een vak</h2>
+        <div id="vak-raster" class="vak-raster"></div>
+      </section>
+
+      <section id="voortgang-overzicht" class="voortgang-sectie"></section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Bovenbouw Leerdoelen · Gemaakt voor leerlingen</p>
+    </footer>
+  </div>
+
+  <!-- ===================== VAK DETAIL ===================== -->
+  <div id="scherm-vak" class="scherm" hidden>
+    <div id="vak-detail-header" class="vak-header">
+      <div class="vak-header-overlay">
+        <button class="terug-knop" onclick="navigeerNaar('#home')">← Terug</button>
+        <div class="vak-header-info">
+          <span id="vak-detail-icoon" class="vak-groot-icoon"></span>
+          <h1 id="vak-detail-naam" class="vak-groot-naam"></h1>
+        </div>
+      </div>
+    </div>
+
+    <main class="vak-inhoud">
+      <div id="categorie-filters" class="categorie-filters-sectie"></div>
+      <div id="modus-knoppen" class="modus-knoppen-sectie"></div>
+      <div id="vak-scores" class="vak-scores-sectie"></div>
+    </main>
+  </div>
+
+  <!-- ===================== FLASHCARDS ===================== -->
+  <div id="scherm-flashcards" class="scherm" hidden>
+    <div class="fc-header">
+      <button class="terug-knop" onclick="navigeerNaar('#home')">← Terug</button>
+      <span id="fc-vak-naam" class="fc-vak-naam"></span>
+      <span id="fc-teller" class="fc-teller"></span>
+    </div>
+
+    <div class="fc-voortgangsbalk">
+      <div id="fc-voortgangsbalk-fill" class="fc-voortgangsbalk-fill"></div>
+    </div>
+
+    <main class="fc-inhoud">
+      <p id="fc-categorie" class="fc-categorie-label"></p>
+
+      <div class="kaart-container" onclick="flipKaart()" title="Klik om om te draaien">
+        <div class="kaart" id="fc-kaart">
+          <div class="kaart-voorkant">
+            <p class="kaart-label">Vraag</p>
+            <p id="fc-voorkant-tekst" class="kaart-tekst"></p>
+          </div>
+          <div class="kaart-achterkant">
+            <p class="kaart-label">Antwoord</p>
+            <p id="fc-achterkant-tekst" class="kaart-tekst"></p>
+          </div>
+        </div>
+      </div>
+
+      <p id="fc-flip-hint" class="fc-hint">👆 Klik op de kaart om het antwoord te zien</p>
+
+      <div id="fc-actie-knoppen" class="fc-actie-knoppen" style="display:none">
+        <button class="fc-knop fc-knop-onbekend" onclick="markeerKaart(false)">
+          <span>😕</span> Nog oefenen
+        </button>
+        <button class="fc-knop fc-knop-gekend" onclick="markeerKaart(true)">
+          <span>🎉</span> Ik kende het!
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- ===================== FLASHCARD RESULTAAT ===================== -->
+  <div id="scherm-flashcard-resultaat" class="scherm" hidden>
+    <main class="resultaat-inhoud">
+      <h2 class="resultaat-titel">Ronde klaar!</h2>
+
+      <div class="fc-res-cirkel">
+        <span id="fc-res-pct" class="score-groot"></span>
+      </div>
+
+      <div class="fc-res-stats">
+        <div class="fc-res-stat fc-res-gekend">
+          <span class="res-getal" id="fc-res-gekend"></span>
+          <span class="res-label">Gekend</span>
+        </div>
+        <div class="fc-res-stat fc-res-onbekend-stat">
+          <span class="res-getal" id="fc-res-onbekend"></span>
+          <span class="res-label">Nog oefenen</span>
+        </div>
+        <div class="fc-res-stat">
+          <span class="res-getal" id="fc-res-totaal"></span>
+          <span class="res-label">Totaal</span>
+        </div>
+      </div>
+
+      <div class="resultaat-knoppen">
+        <button id="fc-res-opnieuw-onbekend" class="actie-knop knop-primair" onclick="herhaatOnbekend()">
+          🔄 Herhaal onbekende kaarten
+        </button>
+        <button class="actie-knop knop-secundair" onclick="navigeerNaar('#home')">
+          🏠 Terug naar home
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- ===================== QUIZ ===================== -->
+  <div id="scherm-quiz" class="scherm" hidden>
+    <div class="quiz-header">
+      <button class="terug-knop" onclick="navigeerNaar('#home')">← Terug</button>
+      <div class="quiz-header-info">
+        <span id="quiz-vak-naam" class="quiz-vak-naam"></span>
+        <span class="quiz-modus-scheider">·</span>
+        <span id="quiz-modus-naam" class="quiz-modus-naam"></span>
+      </div>
+      <span id="quiz-teller" class="quiz-teller"></span>
+    </div>
+
+    <div class="quiz-voortgangsbalk">
+      <div id="quiz-voortgangsbalk-fill" class="quiz-voortgangsbalk-fill"></div>
+    </div>
+
+    <main class="quiz-inhoud">
+      <p id="quiz-categorie" class="quiz-categorie-label"></p>
+      <div class="vraag-kaart">
+        <p id="quiz-vraag-tekst" class="quiz-vraag-tekst"></p>
+      </div>
+
+      <div id="quiz-opties" class="quiz-opties"></div>
+
+      <div id="quiz-feedback" class="quiz-feedback" hidden>
+        <p id="quiz-feedback-titel" class="feedback-titel"></p>
+        <p id="quiz-feedback-tekst" class="feedback-tekst"></p>
+      </div>
+
+      <button id="quiz-volgende-knop" class="actie-knop knop-primair quiz-volgende" hidden onclick="volgendeVraag()">
+        Volgende vraag →
+      </button>
+    </main>
+  </div>
+
+  <!-- ===================== SCORE ===================== -->
+  <div id="scherm-score" class="scherm" hidden>
+    <div class="score-header">
+      <h1 class="score-header-titel">Resultaten</h1>
+      <div class="score-header-sub">
+        <span id="score-vak-naam"></span> · <span id="score-modus-naam"></span>
+      </div>
+    </div>
+
+    <main class="score-inhoud">
+      <div class="score-cirkel-wrapper">
+        <span id="score-pct" class="score-groot"></span>
+        <span id="score-getal" class="score-getal"></span>
+      </div>
+
+      <p id="score-bericht" class="score-bericht"></p>
+
+      <div class="score-knoppen">
+        <button class="actie-knop knop-primair" onclick="window.history.back()">
+          🔄 Opnieuw
+        </button>
+        <button class="actie-knop knop-secundair" onclick="navigeerNaar('#home')">
+          🏠 Home
+        </button>
+      </div>
+
+      <details class="score-review-details">
+        <summary>Bekijk alle antwoorden</summary>
+        <div id="score-review" class="score-review"></div>
+      </details>
+    </main>
+  </div>
+
+  <!-- Data files -->
+  <script src="js/data/duits.js"></script>
+  <script src="js/data/biologie.js"></script>
+  <script src="js/data/nask.js"></script>
+  <script src="js/data/engels.js"></script>
+  <script src="js/data/economie.js"></script>
+  <script src="js/data/geschiedenis.js"></script>
+  <!-- App logic -->
+  <script src="js/score.js"></script>
+  <script src="js/flashcard.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

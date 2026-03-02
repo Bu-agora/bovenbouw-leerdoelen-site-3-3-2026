@@ -1,0 +1,276 @@
+/* ===================== QUIZ HEADER ===================== */
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: var(--vak-kleur, #4A90D9);
+  color: #fff;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.quiz-header-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  justify-content: center;
+}
+
+.quiz-vak-naam { font-size: 1.05rem; font-weight: 700; }
+.quiz-modus-scheider { opacity: 0.6; }
+.quiz-modus-naam { font-size: 0.9rem; opacity: 0.88; }
+.quiz-teller { font-size: 0.9rem; font-weight: 600; opacity: 0.9; white-space: nowrap; }
+
+/* ===================== QUIZ VOORTGANGSBALK ===================== */
+.quiz-voortgangsbalk {
+  height: 6px;
+  background: rgba(0,0,0,0.12);
+  width: 100%;
+}
+
+.quiz-voortgangsbalk-fill {
+  height: 100%;
+  background: rgba(255,255,255,0.75);
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+/* ===================== QUIZ INHOUD ===================== */
+.quiz-inhoud {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.quiz-categorie-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--vak-kleur, #4A90D9);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+/* ===================== VRAAG KAART ===================== */
+.vraag-kaart {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 28px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  margin-bottom: 24px;
+  border-top: 4px solid var(--vak-kleur, #4A90D9);
+}
+
+.quiz-vraag-tekst {
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.55;
+  color: #1a1a2e;
+  text-align: center;
+}
+
+/* ===================== OPTIES ===================== */
+.quiz-opties {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.quiz-optie-knop {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid #e0e4f0;
+  border-radius: 14px;
+  background: #fff;
+  color: #1a1a2e;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  position: relative;
+}
+
+.quiz-optie-knop:not(:disabled):hover {
+  border-color: var(--vak-kleur, #4A90D9);
+  background: #f4f8ff;
+  transform: translateX(4px);
+}
+
+.quiz-optie-knop:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+/* Juist/Onjuist knoppen (2 grote knoppen side by side) */
+.quiz-opties:has(.quiz-jo-knop) {
+  flex-direction: row;
+  gap: 16px;
+}
+
+.quiz-jo-knop {
+  flex: 1;
+  text-align: center;
+  font-size: 1.1rem;
+  padding: 20px 16px;
+  border-radius: 16px;
+}
+
+/* ===================== ANTWOORD FEEDBACK ===================== */
+.quiz-optie-knop.correct {
+  background: #f0fff4;
+  border-color: #27ae60;
+  color: #1a7a45;
+  cursor: default;
+}
+
+.quiz-optie-knop.correct::after {
+  content: " ✓";
+  font-weight: 900;
+  color: #27ae60;
+}
+
+.quiz-optie-knop.fout {
+  background: #fff3f0;
+  border-color: #e74c3c;
+  color: #c0392b;
+  cursor: default;
+}
+
+.quiz-optie-knop.fout::after {
+  content: " ✗";
+  font-weight: 900;
+  color: #e74c3c;
+}
+
+.quiz-optie-knop:disabled:not(.correct):not(.fout) {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ===================== OPEN VRAAG ===================== */
+.open-vraag-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.open-vraag-input {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid #e0e4f0;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #1a1a2e;
+  background: #fff;
+  transition: border-color 0.18s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.open-vraag-input:focus {
+  outline: none;
+  border-color: var(--vak-kleur, #4A90D9);
+  box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.15);
+}
+
+.open-vraag-input.input-correct {
+  border-color: #27ae60;
+  background: #f0fff4;
+  color: #1a7a45;
+}
+
+.open-vraag-input.input-fout {
+  border-color: #e74c3c;
+  background: #fff3f0;
+  color: #c0392b;
+}
+
+.open-vraag-knop {
+  padding: 14px 24px;
+  background: var(--vak-kleur, #4A90D9);
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-self: flex-start;
+}
+
+.open-vraag-knop:hover { opacity: 0.88; transform: translateY(-2px); }
+.open-vraag-knop:active { transform: scale(0.97); }
+
+/* ===================== FEEDBACK BOX ===================== */
+.quiz-feedback {
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  animation: feedbackIn 0.3s ease;
+}
+
+@keyframes feedbackIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback-correct {
+  background: #edfbf2;
+  border: 2px solid #27ae60;
+}
+
+.feedback-fout {
+  background: #fff6f5;
+  border: 2px solid #e74c3c;
+}
+
+.feedback-titel {
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.feedback-correct .feedback-titel { color: #1a7a45; }
+.feedback-fout .feedback-titel { color: #c0392b; }
+
+.feedback-tekst {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #444;
+  white-space: pre-line;
+}
+
+/* ===================== VOLGENDE KNOP ===================== */
+.quiz-volgende {
+  align-self: flex-end;
+  animation: fadeInUp 0.25s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 480px) {
+  .quiz-opties:has(.quiz-jo-knop) {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .quiz-jo-knop {
+    padding: 16px 10px;
+    font-size: 1rem;
+  }
+
+  .vraag-kaart { padding: 20px 16px; }
+  .quiz-volgende { width: 100%; }
+}
