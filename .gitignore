@@ -11,3 +11,6 @@ desktop.ini
 # Editor
 .vscode/
 *.swp
+
+# Lokale notities (niet delen)
+AFBEELDINGEN.md
