@@ -4,11 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leerdoelen Oefenen — Bovenbouw</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/flashcard.css">
   <link rel="stylesheet" href="css/quiz.css">
 </head>
 <body>
+
+  <!-- ===================== GLOBALE NAVBAR ===================== -->
+  <nav class="site-nav">
+    <a href="#home" onclick="navigeerNaar('#home')" class="site-nav-logo">
+      <img src="images/logo-school.svg" alt="Schoollogo" class="nav-logo-img">
+    </a>
+  </nav>
 
   <!-- ===================== HOME ===================== -->
   <div id="scherm-home" class="scherm" hidden>
@@ -28,9 +36,6 @@
       <section id="voortgang-overzicht" class="voortgang-sectie"></section>
     </main>
 
-    <footer class="site-footer">
-      <p>Bovenbouw Leerdoelen · Gemaakt voor leerlingen</p>
-    </footer>
   </div>
 
   <!-- ===================== VAK DETAIL ===================== -->
@@ -195,6 +200,11 @@
       </details>
     </main>
   </div>
+
+  <!-- ===================== GLOBALE FOOTER ===================== -->
+  <footer class="site-footer-global">
+    <span>Gemaakt door </span><a href="https://boazu.nl" target="_blank" rel="noopener" class="footer-link">BU-Development</a>
+  </footer>
 
   <!-- Data files -->
   <script src="js/data/duits.js"></script>
