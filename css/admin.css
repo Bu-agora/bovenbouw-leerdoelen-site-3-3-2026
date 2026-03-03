@@ -1,0 +1,288 @@
+/* ===================== ADMIN — LOGIN ===================== */
+.admin-login-wrapper {
+  min-height: calc(100vh - 52px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--kleur-achtergrond);
+}
+
+.admin-login-kaart {
+  background: var(--kleur-wit);
+  border: 1.5px solid var(--kleur-border);
+  border-radius: var(--radius-groot);
+  box-shadow: var(--schaduw);
+  padding: 40px 32px;
+  max-width: 340px;
+  width: 100%;
+  text-align: center;
+}
+
+.admin-login-logo { font-size: 2.5rem; margin-bottom: 8px; }
+.admin-login-titel { font-size: 1.4rem; font-weight: 800; margin-bottom: 24px; color: var(--kleur-tekst); }
+
+.admin-pin-dots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.admin-pin-dots span {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--kleur-border);
+  background: transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.admin-pin-dots span.gevuld {
+  background: var(--kleur-tekst);
+  border-color: var(--kleur-tekst);
+}
+
+.admin-fout {
+  color: var(--kleur-slecht);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.admin-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.admin-key {
+  padding: 16px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: 1.5px solid var(--kleur-border);
+  border-radius: 12px;
+  background: var(--kleur-wit);
+  cursor: pointer;
+  color: var(--kleur-tekst);
+  transition: background 0.12s;
+}
+.admin-key:hover:not(:disabled) { background: var(--kleur-achtergrond); }
+.admin-key:active:not(:disabled) { background: var(--kleur-border); }
+.admin-key-leeg, .admin-key-leeg:hover { background: transparent; border-color: transparent; cursor: default; }
+.admin-key-wis { color: var(--kleur-tekst-licht); }
+
+/* ===================== ADMIN — PANEL ===================== */
+.admin-panel-header {
+  position: sticky;
+  top: 52px;
+  z-index: 100;
+  background: var(--kleur-wit);
+  border-bottom: 1.5px solid var(--kleur-border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  flex-wrap: wrap;
+}
+
+.admin-panel-titel {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--kleur-tekst);
+  flex: 1;
+}
+
+.admin-panel-acties { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.admin-actie-knop {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.admin-actie-knop:hover { opacity: 0.85; }
+.admin-download-knop { background: #27ae60; color: #fff; }
+.admin-logout-knop   { background: var(--kleur-border); color: var(--kleur-tekst); }
+
+.admin-info {
+  background: #eaf4fd;
+  border-left: 4px solid #2980b9;
+  padding: 12px 20px;
+  font-size: 0.88rem;
+  color: #1a5276;
+  margin: 16px 24px;
+  border-radius: 8px;
+}
+
+/* ===================== ADMIN — VAK ACCORDION ===================== */
+#admin-editor {
+  padding: 0 24px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-vak-details {
+  border: 1.5px solid var(--kleur-border);
+  border-radius: var(--radius);
+  background: var(--kleur-wit);
+  overflow: hidden;
+}
+
+.admin-vak-summary {
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--kleur-wit);
+  user-select: none;
+}
+.admin-vak-summary::-webkit-details-marker { display: none; }
+.admin-vak-summary::after {
+  content: "↓";
+  margin-left: auto;
+  color: var(--kleur-tekst-licht);
+  transition: transform 0.2s;
+}
+.admin-vak-details[open] .admin-vak-summary::after { transform: rotate(180deg); }
+
+.admin-vak-inhoud {
+  padding: 16px 20px 24px;
+  border-top: 1px solid var(--kleur-border);
+}
+
+.admin-sub-titel {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--kleur-tekst-licht);
+  margin-bottom: 10px;
+}
+
+/* ===================== ADMIN — FLASHCARD TABEL ===================== */
+.admin-tabel-wrapper { overflow-x: auto; }
+
+.admin-tabel {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.admin-tabel th {
+  background: var(--kleur-achtergrond);
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--kleur-tekst-licht);
+  border-bottom: 1.5px solid var(--kleur-border);
+}
+
+.admin-tabel td {
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--kleur-border);
+  vertical-align: top;
+}
+
+.admin-nr {
+  font-size: 0.78rem;
+  color: var(--kleur-tekst-licht);
+  width: 32px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+/* ===================== ADMIN — BEWERKBAAR CEL ===================== */
+.admin-cel {
+  min-height: 36px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1.5px solid transparent;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+  cursor: text;
+}
+.admin-cel:hover { border-color: var(--kleur-border); background: var(--kleur-achtergrond); }
+.admin-cel:focus { border-color: #2980b9; background: #f0f8ff; }
+.admin-cel-breed { width: 100%; }
+
+/* ===================== ADMIN — VRAAG KAARTEN ===================== */
+.admin-vragen-lijst {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-vraag-kaart {
+  border: 1.5px solid var(--kleur-border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: var(--kleur-achtergrond);
+}
+
+.admin-vraag-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.admin-type-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.admin-type-meerkeuze  { background: #d6eaf8; color: #1a5276; }
+.admin-type-open       { background: #d5f5e3; color: #1a5e35; }
+.admin-type-juistonjuist { background: #fde8d8; color: #7d3c00; }
+
+.admin-vraag-nr { font-size: 0.78rem; color: var(--kleur-tekst-licht); font-weight: 600; }
+
+.admin-veld-rij {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.admin-veld-groep {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-veld-groep label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--kleur-tekst-licht);
+}
+
+.admin-veld-breed { grid-column: 1 / -1; }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 600px) {
+  .admin-veld-rij { grid-template-columns: 1fr; }
+  .admin-panel-header { flex-direction: column; align-items: flex-start; }
+}

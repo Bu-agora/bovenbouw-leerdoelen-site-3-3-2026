@@ -118,6 +118,8 @@ function handleHashChange() {
 
   if (scherm === "home") {
     toonHome();
+  } else if (scherm === "admin") {
+    document.getElementById("scherm-admin").hidden = false;
   } else if (scherm === "toetsen") {
     toonToetsen();
   } else if (scherm === "vak" && delen[1]) {
