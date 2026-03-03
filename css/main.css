@@ -377,9 +377,9 @@ body {
   color: #fff;
 }
 
-.score-badge.score-goed { background: var(--kleur-goed); }
-.score-badge.score-matig { background: var(--kleur-matig); }
-.score-badge.score-slecht { background: var(--kleur-slecht); }
+.score-badge.score-goed { background: var(--kleur-goed); color: #fff; }
+.score-badge.score-matig { background: var(--kleur-matig); color: #fff; }
+.score-badge.score-slecht { background: var(--kleur-slecht); color: #fff; }
 
 .badge-modus { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.9; }
 .badge-beste { font-size: 1.8rem; font-weight: 800; line-height: 1; margin: 4px 0; }
