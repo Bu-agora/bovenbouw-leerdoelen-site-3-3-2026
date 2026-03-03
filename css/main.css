@@ -72,6 +72,7 @@ body {
 }
 
 .footer-link:hover { text-decoration: underline; }
+.footer-scheider { margin: 0 8px; color: var(--kleur-tekst-licht); }
 
 /* ===================== SCHERMEN ===================== */
 .scherm { display: block; }
@@ -358,6 +359,68 @@ body {
 .modus-tekst { font-size: 1.05rem; font-weight: 700; }
 .modus-beschrijving { font-size: 0.82rem; color: var(--kleur-tekst-licht); }
 
+/* ===================== LEERDOELEN ===================== */
+.vak-leerdoelen-sectie { padding: 0 24px 8px; max-width: 900px; margin: 0 auto; }
+
+.leerdoelen-details {
+  background: var(--kleur-wit);
+  border: 1.5px solid var(--kleur-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.leerdoelen-summary {
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--kleur-tekst);
+  user-select: none;
+}
+.leerdoelen-summary::-webkit-details-marker { display: none; }
+.leerdoelen-summary::after {
+  content: "↓";
+  margin-left: auto;
+  font-size: 0.9rem;
+  color: var(--kleur-tekst-licht);
+  transition: transform 0.2s;
+}
+.leerdoelen-details[open] .leerdoelen-summary::after { transform: rotate(180deg); }
+
+.leerdoelen-inhoud {
+  padding: 0 20px 16px;
+  border-top: 1px solid var(--kleur-border);
+}
+
+.leerdoelen-groep {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--vak-kleur, var(--kleur-tekst-licht));
+  margin: 16px 0 8px;
+}
+
+.leerdoelen-lijst {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.leerdoelen-lijst li {
+  padding: 8px 12px;
+  background: var(--kleur-achtergrond);
+  border-radius: 8px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  border-left: 3px solid var(--vak-kleur, var(--kleur-border));
+}
+
 /* ===================== SCORE BADGES ===================== */
 .vak-scores-sectie { margin-top: 8px; }
 .vak-scores-sectie h3 {
@@ -592,11 +655,60 @@ body {
   margin: 0 auto;
 }
 
+/* Banner-knop op home */
+.toetsen-banner-knop {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 18px 20px;
+  background: var(--kleur-wit);
+  border: 1.5px solid var(--kleur-border);
+  border-radius: var(--radius);
+  box-shadow: var(--schaduw);
+  cursor: pointer;
+  text-align: left;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.toetsen-banner-knop:hover {
+  box-shadow: var(--schaduw-hover);
+  border-color: #aed6f1;
+}
+.toetsen-banner-icoon { font-size: 1.8rem; }
+.toetsen-banner-tekst {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+.toetsen-banner-tekst strong { font-size: 1rem; color: var(--kleur-tekst); }
+.toetsen-banner-tekst span   { font-size: 0.85rem; color: var(--kleur-tekst-licht); }
+.toetsen-banner-pijl { font-size: 1.3rem; color: var(--kleur-tekst-licht); }
+
+/* Toetsen-pagina header */
+.toetsen-pg-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.toetsen-pg-titel {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--kleur-tekst);
+}
+.toetsen-pg-inhoud {
+  padding: 20px 24px 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 .toetsen-raster {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 16px;
 }
 
 .toets-kaart {
@@ -664,6 +776,24 @@ body {
   gap: 12px;
   font-size: 0.82rem;
   color: var(--kleur-tekst-licht);
+}
+
+.toets-meer-knop {
+  margin-top: 8px;
+  width: 100%;
+  padding: 9px 0;
+  background: none;
+  border: 1.5px solid var(--kleur-border);
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--kleur-tekst-licht);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.toets-meer-knop:hover, .toets-meer-knop.open {
+  background: var(--kleur-border);
+  color: var(--kleur-tekst);
 }
 
 /* ===================== RESPONSIVE ===================== */

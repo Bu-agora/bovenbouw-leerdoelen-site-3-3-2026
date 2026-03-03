@@ -42,20 +42,20 @@ function dagenTot(datum) {
   return Math.round((toets - vandaag) / 86400000);
 }
 
-function renderToetsen() {
-  const container = document.getElementById("toetsen-container");
+function renderToetsen(containerId = "toetsen-container", toonAlle = false) {
+  const container = document.getElementById(containerId);
   if (!container) return;
 
   const MAANDEN = ["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"];
 
-  container.innerHTML = TOETSEN.map(t => {
+  const kaarten = TOETSEN.map((t, i) => {
     const dagen = dagenTot(t.datum);
     const datumTekst = `${t.dag} ${t.datum.getDate()} ${MAANDEN[t.datum.getMonth()]}`;
 
     let badgeTekst, badgeKlasse;
-    if (dagen < 0)       { badgeTekst = "Voorbij";        badgeKlasse = "badge-voorbij"; }
-    else if (dagen === 0){ badgeTekst = "Vandaag!";       badgeKlasse = "badge-vandaag"; }
-    else if (dagen === 1){ badgeTekst = "Morgen!";        badgeKlasse = "badge-morgen";  }
+    if (dagen < 0)       { badgeTekst = "Voorbij";             badgeKlasse = "badge-voorbij"; }
+    else if (dagen === 0){ badgeTekst = "Vandaag!";            badgeKlasse = "badge-vandaag"; }
+    else if (dagen === 1){ badgeTekst = "Morgen!";             badgeKlasse = "badge-morgen";  }
     else if (dagen <= 3) { badgeTekst = `Over ${dagen} dagen`; badgeKlasse = "badge-snel";    }
     else                 { badgeTekst = `Over ${dagen} dagen`; badgeKlasse = "badge-normaal"; }
 
@@ -65,8 +65,9 @@ function renderToetsen() {
       </span>`
     ).join("");
 
+    const verberg = !toonAlle && i > 0;
     return `
-      <div class="toets-kaart ${dagen < 0 ? "toets-voorbij" : ""}">
+      <div class="toets-kaart ${dagen < 0 ? "toets-voorbij" : ""} ${!toonAlle && i > 0 ? "toets-extra" : ""}" style="${verberg ? "display:none" : ""}">
         <div class="toets-datum-rij">
           <span class="toets-datum">${datumTekst}</span>
           <span class="toets-countdown-badge ${badgeKlasse}">${badgeTekst}</span>
@@ -77,7 +78,20 @@ function renderToetsen() {
           <span class="toets-docenten">${t.docenten.join(" · ")}</span>
         </div>
       </div>`;
-  }).join("");
+  });
+
+  const toonMeerKnop = (!toonAlle && TOETSEN.length > 1)
+    ? `<button class="toets-meer-knop" onclick="toggleToetsen(this)">Toon alle toetsen ↓</button>`
+    : "";
+
+  container.innerHTML = kaarten.join("") + toonMeerKnop;
+}
+
+function toggleToetsen(knop) {
+  const extra = document.querySelectorAll(".toets-extra");
+  const open = knop.classList.toggle("open");
+  extra.forEach(el => el.style.display = open ? "" : "none");
+  knop.textContent = open ? "Minder tonen ↑" : "Toon alle toetsen ↓";
 }
 
 // --- Utility ---
@@ -104,6 +118,8 @@ function handleHashChange() {
 
   if (scherm === "home") {
     toonHome();
+  } else if (scherm === "toetsen") {
+    toonToetsen();
   } else if (scherm === "vak" && delen[1]) {
     toonVakDetail(delen[1]);
   } else if (scherm === "flashcards" && delen[1]) {
@@ -141,9 +157,14 @@ function toonHome() {
   const scherm = document.getElementById("scherm-home");
   scherm.hidden = false;
 
-  renderToetsen();
   renderVakRaster();
   renderVoortgangOverzicht();
+}
+
+// --- Toetsen Screen ---
+function toonToetsen() {
+  document.getElementById("scherm-toetsen").hidden = false;
+  renderToetsen("toetsen-pg-container", true);
 }
 
 function renderVakRaster() {
@@ -227,6 +248,9 @@ function toonVakDetail(vakId) {
 
   // Scores
   renderVakScores(vakId);
+
+  // Leerdoelen
+  renderLeerdoelen(vakId);
 }
 
 function renderCategorieFilters(vakId, categorieen) {
@@ -331,6 +355,31 @@ function renderVakScores(vakId) {
     }
   });
   html += "</div>";
+  container.innerHTML = html;
+}
+
+function renderLeerdoelen(vakId) {
+  const container = document.getElementById("vak-leerdoelen");
+  if (!container) return;
+
+  const groepen = LEERDOELEN[vakId];
+  if (!groepen || groepen.length === 0) {
+    container.innerHTML = "";
+    return;
+  }
+
+  let html = "<details class='leerdoelen-details'><summary class='leerdoelen-summary'>📋 Originele leerdoelen</summary><div class='leerdoelen-inhoud'>";
+
+  groepen.forEach(g => {
+    if (g.groep) html += `<h4 class="leerdoelen-groep">${g.groep}</h4>`;
+    html += "<ul class='leerdoelen-lijst'>";
+    g.items.forEach(item => {
+      html += `<li>${item}</li>`;
+    });
+    html += "</ul>";
+  });
+
+  html += "</div></details>";
   container.innerHTML = html;
 }
 

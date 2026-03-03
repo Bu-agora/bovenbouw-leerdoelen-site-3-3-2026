@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leerdoelen Oefenen — Bovenbouw</title>
+  <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/flashcard.css">
@@ -29,8 +30,14 @@
 
     <main class="home-inhoud">
       <section class="toetsen-sectie">
-        <h2 class="sectie-titel">Aankomende toetsen</h2>
-        <div id="toetsen-container" class="toetsen-raster"></div>
+        <button class="toetsen-banner-knop" onclick="navigeerNaar('#toetsen')">
+          <span class="toetsen-banner-icoon">📅</span>
+          <span class="toetsen-banner-tekst">
+            <strong>Aankomende toetsen</strong>
+            <span>Bekijk de toetsrooster met vakken en tijden</span>
+          </span>
+          <span class="toetsen-banner-pijl">→</span>
+        </button>
       </section>
 
       <section class="vak-sectie">
@@ -113,6 +120,7 @@
       <div id="categorie-filters" class="categorie-filters-sectie"></div>
       <div id="modus-knoppen" class="modus-knoppen-sectie"></div>
       <div id="vak-scores" class="vak-scores-sectie"></div>
+      <div id="vak-leerdoelen" class="vak-leerdoelen-sectie"></div>
     </main>
   </div>
 
@@ -260,12 +268,27 @@
     </main>
   </div>
 
+  <!-- ===================== TOETSEN ===================== -->
+  <div id="scherm-toetsen" class="scherm" hidden>
+    <div class="toetsen-pg-header">
+      <button class="terug-knop" onclick="navigeerNaar('#home')">← Terug</button>
+      <h1 class="toetsen-pg-titel">Aankomende toetsen</h1>
+    </div>
+    <main class="toetsen-pg-inhoud">
+      <div id="toetsen-pg-container" class="toetsen-raster"></div>
+    </main>
+  </div>
+
   <!-- ===================== GLOBALE FOOTER ===================== -->
   <footer class="site-footer-global">
     <span>Gemaakt door </span><a href="https://boazu.nl" target="_blank" rel="noopener" class="footer-link">BU-Development</a>
+    <span class="footer-scheider">·</span>
+    <a href="https://github.com/Bu-agora/bovenbouw-leerdoelen-site-3-3-2026" target="_blank" rel="noopener" class="footer-link">GitHub repo</a>
   </footer>
 
-  <!-- Data files -->
+  <!-- Data files — pas inhoud.js aan om vragen/antwoorden te wijzigen -->
+  <script src="js/data/inhoud.js"></script>
+  <script src="js/data/leerdoelen.js"></script>
   <script src="js/data/duits.js"></script>
   <script src="js/data/biologie.js"></script>
   <script src="js/data/nask.js"></script>
