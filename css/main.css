@@ -585,6 +585,87 @@ body {
 }
 .dl-knop-downloaden:hover { background: #d5f5e3; }
 
+/* ===================== TOETSEN ===================== */
+.toetsen-sectie {
+  padding: 32px 24px 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.toetsen-raster {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.toets-kaart {
+  background: var(--kleur-wit);
+  border: 1.5px solid var(--kleur-border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  box-shadow: var(--schaduw);
+}
+
+.toets-kaart.toets-voorbij {
+  opacity: 0.55;
+  filter: grayscale(0.4);
+}
+
+.toets-datum-rij {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.toets-datum {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--kleur-tekst);
+}
+
+.toets-countdown-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.badge-vandaag  { background: #ffeaa0; color: #7d5e00; border: 1.5px solid #f5c842; }
+.badge-morgen   { background: #ffd6a5; color: #7a3b00; border: 1.5px solid #f0a040; }
+.badge-snel     { background: #ffe0e0; color: #8b0000; border: 1.5px solid #f08080; }
+.badge-normaal  { background: #e8f4fd; color: #1a5276;  border: 1.5px solid #aed6f1; }
+.badge-voorbij  { background: #f0f0f0; color: #888;     border: 1.5px solid #ccc; }
+
+.toets-vakken {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.toets-vak-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1.5px solid transparent;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.toets-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: var(--kleur-tekst-licht);
+}
+
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 600px) {
   .vak-raster { grid-template-columns: repeat(2, 1fr); gap: 12px; }

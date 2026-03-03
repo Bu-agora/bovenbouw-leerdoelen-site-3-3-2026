@@ -1,6 +1,85 @@
 // Main application: routing, state, screen management
 const ALLE_VAKKEN = [DUITS, BIOLOGIE, NASK, ENGELS, ECONOMIE, GESCHIEDENIS];
 
+// --- Toetsen ---
+const TOETSEN = [
+  {
+    datum: new Date(2026, 2, 9),   // maandag 9 maart 2026
+    dag: "Maandag",
+    vakken: [
+      { naam: "Duits",    kleur: "#4A90D9", icoon: "🇩🇪", id: "duits" },
+      { naam: "Biologie", kleur: "#27AE60", icoon: "🌿",  id: "biologie" },
+    ],
+    tijd: "09:30 – 10:55",
+    docenten: ["Dhr. J.H. van Aerde", "Mevr. S.M. van der Steen"],
+  },
+  {
+    datum: new Date(2026, 2, 11),  // woensdag 11 maart 2026
+    dag: "Woensdag",
+    vakken: [
+      { naam: "Engels", kleur: "#E74C3C", icoon: "🇬🇧", id: "engels" },
+      { naam: "NaSk",   kleur: "#8E44AD", icoon: "⚡",   id: "nask" },
+    ],
+    tijd: "13:45 – 14:45",
+    docenten: ["Mevr. S.M. van der Steen", "Dhr. J.H. van Aerde"],
+  },
+  {
+    datum: new Date(2026, 2, 13),  // vrijdag 13 maart 2026
+    dag: "Vrijdag",
+    vakken: [
+      { naam: "Economie",    kleur: "#E67E22", icoon: "💶", id: "economie" },
+      { naam: "Geschiedenis", kleur: "#D4A017", icoon: "📜", id: "geschiedenis" },
+    ],
+    tijd: "11:00 – 12:15",
+    docenten: ["Mevr. S.M. van der Steen", "Dhr. J.H. van Aerde"],
+  },
+];
+
+function dagenTot(datum) {
+  const nu = new Date();
+  const vandaag = new Date(nu.getFullYear(), nu.getMonth(), nu.getDate());
+  const toets  = new Date(datum.getFullYear(), datum.getMonth(), datum.getDate());
+  return Math.round((toets - vandaag) / 86400000);
+}
+
+function renderToetsen() {
+  const container = document.getElementById("toetsen-container");
+  if (!container) return;
+
+  const MAANDEN = ["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"];
+
+  container.innerHTML = TOETSEN.map(t => {
+    const dagen = dagenTot(t.datum);
+    const datumTekst = `${t.dag} ${t.datum.getDate()} ${MAANDEN[t.datum.getMonth()]}`;
+
+    let badgeTekst, badgeKlasse;
+    if (dagen < 0)       { badgeTekst = "Voorbij";        badgeKlasse = "badge-voorbij"; }
+    else if (dagen === 0){ badgeTekst = "Vandaag!";       badgeKlasse = "badge-vandaag"; }
+    else if (dagen === 1){ badgeTekst = "Morgen!";        badgeKlasse = "badge-morgen";  }
+    else if (dagen <= 3) { badgeTekst = `Over ${dagen} dagen`; badgeKlasse = "badge-snel";    }
+    else                 { badgeTekst = `Over ${dagen} dagen`; badgeKlasse = "badge-normaal"; }
+
+    const vakkenHtml = t.vakken.map(v =>
+      `<span class="toets-vak-chip" style="background:${v.kleur}22; color:${v.kleur}; border-color:${v.kleur}44">
+        ${v.icoon} ${v.naam}
+      </span>`
+    ).join("");
+
+    return `
+      <div class="toets-kaart ${dagen < 0 ? "toets-voorbij" : ""}">
+        <div class="toets-datum-rij">
+          <span class="toets-datum">${datumTekst}</span>
+          <span class="toets-countdown-badge ${badgeKlasse}">${badgeTekst}</span>
+        </div>
+        <div class="toets-vakken">${vakkenHtml}</div>
+        <div class="toets-details">
+          <span class="toets-tijd">🕐 ${t.tijd}</span>
+          <span class="toets-docenten">${t.docenten.join(" · ")}</span>
+        </div>
+      </div>`;
+  }).join("");
+}
+
 // --- Utility ---
 function schudArray(arr) {
   const a = [...arr];
@@ -62,6 +141,7 @@ function toonHome() {
   const scherm = document.getElementById("scherm-home");
   scherm.hidden = false;
 
+  renderToetsen();
   renderVakRaster();
   renderVoortgangOverzicht();
 }
