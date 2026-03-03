@@ -26,13 +26,6 @@ Een statische website waarmee leerlingen kunnen oefenen met flashcards en quizze
 
 Open `index.html` direct in een browser. Er is geen build-stap, server of installatie nodig.
 
-## Hosten op GitHub Pages
-
-1. Push de repository naar GitHub
-2. Ga naar **Settings → Pages**
-3. Stel in: **Source → Deploy from branch → `main`, map `/` (root)**
-4. De site is beschikbaar op `https://[gebruikersnaam].github.io/[repo-naam]/`
-
 ## Afbeeldingen
 
 De map `images/` is leeg in deze repository. Voeg zelf afbeeldingen toe — zie `AFBEELDINGEN.md` voor instructies (dit bestand staat lokaal, niet in de repo).
