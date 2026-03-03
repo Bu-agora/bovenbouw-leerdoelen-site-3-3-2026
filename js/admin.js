@@ -2,7 +2,7 @@
 // ADMIN.JS — Beveiligd beheerpaneel
 // PIN aanpassen: wijzig de waarde hieronder
 // =============================================================================
-const ADMIN_PIN = "1234";
+const ADMIN_PIN = "2012";
 
 let adminIngevoerd = "";
 let adminIngelogd = false;
