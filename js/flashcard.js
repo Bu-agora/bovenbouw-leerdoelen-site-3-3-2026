@@ -48,17 +48,27 @@ function toonKaart(index) {
 
   const kaart = kaarten[index];
   const kaartEl = document.getElementById("fc-kaart");
-  kaartEl.classList.remove("omgedraaid");
 
-  document.getElementById("fc-voorkant-tekst").textContent = kaart.voorkant;
-  document.getElementById("fc-achterkant-tekst").textContent = kaart.achterkant;
-  document.getElementById("fc-categorie").textContent = kaart.categorie;
-
-  // Hide action buttons until card is flipped
+  // Hide action buttons immediately
   document.getElementById("fc-actie-knoppen").style.display = "none";
   document.getElementById("fc-flip-hint").style.display = "block";
 
-  updateFlashcardVoortgang();
+  const wasOmgedraaid = kaartEl.classList.contains("omgedraaid");
+  kaartEl.classList.remove("omgedraaid");
+
+  const updateTekst = () => {
+    document.getElementById("fc-voorkant-tekst").textContent = kaart.voorkant;
+    document.getElementById("fc-achterkant-tekst").textContent = kaart.achterkant;
+    document.getElementById("fc-categorie").textContent = kaart.categorie;
+    updateFlashcardVoortgang();
+  };
+
+  // Als de kaart omgedraaid was, wacht tot halverwege de flip-animatie (kaart staat op z'n kant)
+  if (wasOmgedraaid) {
+    setTimeout(updateTekst, 275);
+  } else {
+    updateTekst();
+  }
 }
 
 function flipKaart() {
