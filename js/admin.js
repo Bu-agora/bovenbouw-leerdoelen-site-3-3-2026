@@ -58,8 +58,24 @@ function adminUitloggen() {
 
 // --- Data ---
 function adminLaadData() {
-  // Diepe kopie van INHOUD zodat bewerkingen het origineel niet aantasten
-  adminData = JSON.parse(JSON.stringify(INHOUD));
+  adminData = {};
+  ALLE_VAKKEN.forEach(vak => {
+    adminData[vak.id] = {
+      flashcards: vak.flashcards.map(fc => ({
+        v: fc.voorkant,
+        a: fc.achterkant,
+        cat: fc.categorie
+      })),
+      vragen: vak.quizvragen.map(q => ({
+        type: q.type,
+        vraag: q.vraag,
+        antwoord: q.antwoord,
+        fouten: q.opties ? q.opties.filter(o => o !== q.antwoord) : [],
+        uitleg: q.uitleg || "",
+        cat: q.categorie
+      }))
+    };
+  });
 }
 
 // --- Editor renderen ---
@@ -179,19 +195,14 @@ function adminBewerk(el) {
   }
 }
 
-// --- Download inhoud.js ---
+// --- Download export ---
 function adminDownload() {
-  const inhoud = `// Gegenereerd via admin panel op ${new Date().toLocaleDateString("nl-NL")}
-// Vervang het bestaande js/data/inhoud.js bestand door dit bestand.
-// Lees de commentaar in het originele bestand voor uitleg over het formaat.
-
-const INHOUD = ${JSON.stringify(adminData, null, 2)};
-`;
-  const blob = new Blob([inhoud], { type: "text/javascript;charset=utf-8" });
+  const json = JSON.stringify(adminData, null, 2);
+  const blob = new Blob([json], { type: "application/json;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "inhoud.js";
+  a.download = "leerdoelen-export.json";
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
