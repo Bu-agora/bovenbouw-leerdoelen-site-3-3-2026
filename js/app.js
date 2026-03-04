@@ -296,14 +296,33 @@ function renderCategorieFilters(vakId, categorieen) {
 
 function renderModusKnoppen(vakId) {
   const container = document.getElementById("modus-knoppen");
+
+  let flashcardExtra = "";
+  if (vakId === "duits") {
+    flashcardExtra = `
+      <div class="flashcard-snelstart-rij">
+        <button class="modus-knop modus-flashcard-sub" onclick="categorieSelectie['duits']=['Voornaamwoorden']; navigeerNaar('#flashcards/duits')">
+          <span class="modus-icoon">🔤</span>
+          <span class="modus-tekst">Voornaamwoorden</span>
+          <span class="modus-beschrijving">Alleen persoonlijke voornaamwoorden</span>
+        </button>
+        <button class="modus-knop modus-flashcard-sub" onclick="categorieSelectie['duits']=['Woordenschat']; navigeerNaar('#flashcards/duits')">
+          <span class="modus-icoon">📝</span>
+          <span class="modus-tekst">Woordenlijst</span>
+          <span class="modus-beschrijving">Alleen woordenschat oefenen</span>
+        </button>
+      </div>`;
+  }
+
   container.innerHTML = `
     <div class="modus-sectie">
       <h3>Leren</h3>
-      <button class="modus-knop modus-flashcard" onclick="navigeerNaar('#flashcards/${vakId}')">
+      <button class="modus-knop modus-flashcard" onclick="categorieSelectie['${vakId}']=[]; navigeerNaar('#flashcards/${vakId}')">
         <span class="modus-icoon">🃏</span>
         <span class="modus-tekst">Flashcards</span>
-        <span class="modus-beschrijving">Oefen met kaarten omdraaien</span>
+        <span class="modus-beschrijving">Alle kaarten oefenen</span>
       </button>
+      ${flashcardExtra}
     </div>
     <div class="modus-sectie">
       <h3>Quiz</h3>

@@ -355,6 +355,9 @@ body {
 
 .modus-flashcard { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 16px; }
 
+.flashcard-snelstart-rij { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.modus-flashcard-sub { flex-direction: row; align-items: center; gap: 12px; }
+
 .modus-icoon { font-size: 1.8rem; }
 .modus-tekst { font-size: 1.05rem; font-weight: 700; }
 .modus-beschrijving { font-size: 0.82rem; color: var(--kleur-tekst-licht); }
