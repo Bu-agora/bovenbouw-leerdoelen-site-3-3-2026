@@ -11,7 +11,7 @@ const DUITS = {
   afbeelding: "images/duits.jpg",
 
   flashcards: [
-    // ── Persoonlijke voornaamwoorden ──
+    // ── Persoonlijke voornaamwoorden: Nederlands → Duits ──
     { id: "du_001", voorkant: "Vertaal: ik", achterkant: "ich", categorie: "Voornaamwoorden" },
     { id: "du_002", voorkant: "Vertaal: jij", achterkant: "du", categorie: "Voornaamwoorden" },
     { id: "du_003", voorkant: "Vertaal: hij", achterkant: "er", categorie: "Voornaamwoorden" },
@@ -21,6 +21,16 @@ const DUITS = {
     { id: "du_007", voorkant: "Vertaal: jullie", achterkant: "ihr", categorie: "Voornaamwoorden" },
     { id: "du_008", voorkant: "Vertaal: u (beleefd)", achterkant: "Sie (hoofdletter)", categorie: "Voornaamwoorden" },
     { id: "du_009", voorkant: "Wat kan 'sie' (kleine letter) allemaal betekenen?", achterkant: "1) zij (enkelvoud)\n2) zij (meervoud)\nMet hoofdletter (Sie) = u", categorie: "Voornaamwoorden" },
+
+    // ── Persoonlijke voornaamwoorden: Duits → Nederlands ──
+    { id: "du_r001", voorkant: "Vertaal: ich", achterkant: "ik", categorie: "Voornaamwoorden" },
+    { id: "du_r002", voorkant: "Vertaal: du", achterkant: "jij / je", categorie: "Voornaamwoorden" },
+    { id: "du_r003", voorkant: "Vertaal: er", achterkant: "hij", categorie: "Voornaamwoorden" },
+    { id: "du_r004", voorkant: "Vertaal: sie (kleine letter)", achterkant: "zij (enkelvoud) / zij (meervoud)", categorie: "Voornaamwoorden" },
+    { id: "du_r005", voorkant: "Vertaal: es", achterkant: "het", categorie: "Voornaamwoorden" },
+    { id: "du_r006", voorkant: "Vertaal: wir", achterkant: "wij / we", categorie: "Voornaamwoorden" },
+    { id: "du_r007", voorkant: "Vertaal: ihr", achterkant: "jullie", categorie: "Voornaamwoorden" },
+    { id: "du_r008", voorkant: "Vertaal: Sie (hoofdletter)", achterkant: "u (beleefd)", categorie: "Voornaamwoorden" },
 
     // ── Regelmatige werkwoorden ──
     { id: "du_010", voorkant: "Vervoeg: ich + wohnen", achterkant: "ich wohne", categorie: "Werkwoorden" },
