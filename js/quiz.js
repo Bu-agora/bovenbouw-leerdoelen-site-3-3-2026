@@ -18,7 +18,9 @@ function startQuiz(vakId, modus, categorieen) {
   quizState.antwoorden = [];
   quizState.antwoordGegeven = false;
 
-  let vragen = vak.quizvragen.filter(v => v.type === modus);
+  let vragen = modus === "alles"
+    ? [...vak.quizvragen]
+    : vak.quizvragen.filter(v => v.type === modus);
   if (categorieen && categorieen.length > 0) {
     vragen = vragen.filter(v => categorieen.includes(v.categorie));
   }
@@ -39,7 +41,7 @@ function startQuiz(vakId, modus, categorieen) {
 }
 
 function modusNaam(modus) {
-  return { meerkeuze: "Meerkeuze", open: "Open vragen", juistonjuist: "Juist of Onjuist" }[modus] || modus;
+  return { meerkeuze: "Meerkeuze", open: "Open vragen", juistonjuist: "Juist of Onjuist", alles: "Gemengde Toets" }[modus] || modus;
 }
 
 function toonVraag(index) {
@@ -215,6 +217,33 @@ function volgendeVraag() {
   toonVraag(quizState.huidigIndex + 1);
 }
 
+function buildQuizExportTekst() {
+  const vak = ALLE_VAKKEN.find(v => v.id === quizState.vakId);
+  const totaal = quizState.vragen.length;
+  const correct = quizState.antwoorden.filter(a => a.correct).length;
+  const pct = totaal > 0 ? Math.round((correct / totaal) * 100) : 0;
+  const vakNaam = vak ? vak.naam : quizState.vakId;
+  const datum = new Date().toLocaleDateString("nl-NL");
+
+  let tekst = `RESULTATEN — ${vakNaam} (${modusNaam(quizState.modus)})\n`;
+  tekst += `Datum: ${datum}\n`;
+  tekst += `Score: ${correct} / ${totaal} (${pct}%)\n`;
+  tekst += "─".repeat(40) + "\n\n";
+
+  quizState.antwoorden.forEach((antw, i) => {
+    const vraag = quizState.vragen[i];
+    if (!vraag) return;
+    const icoon = antw.correct ? "✓" : "✗";
+    tekst += `${icoon} ${i + 1}. ${vraag.vraag}\n`;
+    if (!antw.correct) {
+      tekst += `   Jouw antwoord: ${antw.gegeven || "(geen antwoord)"}\n`;
+      tekst += `   Juist antwoord: ${vraag.antwoord}\n`;
+    }
+    tekst += "\n";
+  });
+  return tekst;
+}
+
 function toonQuizScore() {
   const totaal = quizState.vragen.length;
   const correct = quizState.antwoorden.filter(a => a.correct).length;
@@ -262,5 +291,29 @@ function toonQuizScore() {
       </div>
     `;
     reviewEl.appendChild(item);
+  });
+
+  // Export knoppen
+  let exportWrapper = document.getElementById("quiz-export-knoppen");
+  if (!exportWrapper) {
+    exportWrapper = document.createElement("div");
+    exportWrapper.id = "quiz-export-knoppen";
+    exportWrapper.className = "export-knoppen";
+    const scoreInhoud = scoreScherm.querySelector(".score-inhoud");
+    scoreInhoud.appendChild(exportWrapper);
+  }
+  exportWrapper.innerHTML = `
+    <button class="export-knop" onclick="window.print()">📥 Download PDF</button>
+    <button class="export-knop" id="quiz-kopieer-knop" onclick="kopieerQuizResultaat(this)">📋 Kopieer naar klembord</button>
+  `;
+}
+
+function kopieerQuizResultaat(knop) {
+  const tekst = buildQuizExportTekst();
+  navigator.clipboard.writeText(tekst).then(() => {
+    knop.textContent = "✓ Gekopieerd!";
+    setTimeout(() => { knop.textContent = "📋 Kopieer naar klembord"; }, 2000);
+  }).catch(() => {
+    prompt("Kopieer de tekst hieronder:", tekst);
   });
 }

@@ -1,5 +1,29 @@
 // Main application: routing, state, screen management
-const ALLE_VAKKEN = [DUITS, BIOLOGIE, NASK, ENGELS, ECONOMIE, GESCHIEDENIS];
+
+// Virtual vak voor gemengde toets — quizvragen worden dynamisch gevuld
+const GEMENGD_VAK = {
+  id: "gemengd",
+  naam: "Gemengde Toets",
+  kleur: "#7C3AED",
+  icoon: "🧩",
+  afbeelding: null,
+  flashcards: [],
+  quizvragen: [],
+};
+
+const ALLE_VAKKEN = [DUITS, BIOLOGIE, NASK, ENGELS, ECONOMIE, GESCHIEDENIS, GEMENGD_VAK];
+
+function maakGemengdeVragen() {
+  const echteVakken = [DUITS, BIOLOGIE, NASK, ENGELS, ECONOMIE, GESCHIEDENIS];
+  const vragen = [];
+  echteVakken.forEach(vak => {
+    const mk = schudArray(vak.quizvragen.filter(v => v.type === "meerkeuze")).slice(0, 5);
+    const op = schudArray(vak.quizvragen.filter(v => v.type === "open")).slice(0, 1);
+    const jo = schudArray(vak.quizvragen.filter(v => v.type === "juistonjuist")).slice(0, 2);
+    vragen.push(...mk, ...op, ...jo);
+  });
+  GEMENGD_VAK.quizvragen = schudArray(vragen);
+}
 
 // --- Toetsen ---
 const TOETSEN = [
@@ -135,6 +159,9 @@ function handleHashChange() {
   } else if (scherm === "quiz" && delen[1] && delen[2]) {
     const vakId = delen[1];
     const modus = delen[2];
+    if (vakId === "gemengd") {
+      maakGemengdeVragen();
+    }
     document.getElementById("scherm-quiz").hidden = false;
     startQuiz(vakId, modus, geselecteerdeCategorieen(vakId));
   } else {
@@ -174,6 +201,7 @@ function renderVakRaster() {
   raster.innerHTML = "";
 
   ALLE_VAKKEN.forEach(vak => {
+    if (vak.id === "gemengd") return; // apart weergegeven als banner
     const kaart = document.createElement("div");
     kaart.className = "vak-kaart";
     kaart.style.setProperty("--vak-kleur", vak.kleur);

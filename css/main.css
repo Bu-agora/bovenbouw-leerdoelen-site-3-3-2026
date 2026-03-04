@@ -799,6 +799,87 @@ body {
   color: var(--kleur-tekst);
 }
 
+/* ===================== GEMENGDE TOETS BANNER ===================== */
+.gemengd-sectie { padding: 0 24px; max-width: 900px; margin: 0 auto 8px; }
+
+.gemengd-banner-knop {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, #7C3AED22 0%, #A855F722 100%);
+  border: 1.5px solid #A855F755;
+  border-radius: var(--radius);
+  box-shadow: var(--schaduw);
+  cursor: pointer;
+  text-align: left;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.gemengd-banner-knop:hover {
+  box-shadow: var(--schaduw-hover);
+  border-color: #7C3AED;
+}
+.gemengd-banner-icoon { font-size: 1.8rem; }
+.gemengd-banner-tekst { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.gemengd-banner-tekst strong { font-size: 1rem; color: #5B21B6; }
+.gemengd-banner-tekst span   { font-size: 0.85rem; color: var(--kleur-tekst-licht); }
+.gemengd-banner-pijl { font-size: 1.3rem; color: #7C3AED; }
+
+/* ===================== EXPORT KNOPPEN ===================== */
+.export-knoppen {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 24px;
+  padding: 0 16px;
+}
+
+.export-knop {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border: 2px solid var(--kleur-border);
+  border-radius: 40px;
+  background: var(--kleur-wit);
+  color: var(--kleur-tekst);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--schaduw);
+}
+.export-knop:hover {
+  border-color: var(--vak-kleur, #4A90D9);
+  box-shadow: var(--schaduw-hover);
+  transform: translateY(-2px);
+}
+
+/* ===================== PRINT ===================== */
+@media print {
+  .site-nav, .score-knoppen, .export-knoppen, .site-footer-global,
+  .resultaat-knoppen, .fc-res-opnieuw-onbekend { display: none !important; }
+
+  .scherm { display: none !important; }
+  .scherm[hidden] { display: none !important; }
+
+  /* Toon het actieve scherm */
+  #scherm-score:not([hidden]),
+  #scherm-flashcard-resultaat:not([hidden]) { display: block !important; }
+
+  /* Zorg dat details altijd open zijn */
+  details.score-review-details,
+  details#fc-review-wrapper { display: block !important; }
+  details.score-review-details > div,
+  details#fc-review-wrapper > div { display: block !important; }
+
+  body { background: #fff; }
+  .score-inhoud, .resultaat-inhoud { padding: 16px; }
+  .review-item { break-inside: avoid; }
+}
+
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 600px) {
   .vak-raster { grid-template-columns: repeat(2, 1fr); gap: 12px; }
